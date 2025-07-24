@@ -1,10 +1,7 @@
-#include <algorithm>
+
 #include <iostream>
 #include <string>
-#include <deque>
-#include <ranges>
-#include <functional>
-#include <unordered_map>
+#include <vector>
 #include <iomanip>
 
 using namespace std;
@@ -12,10 +9,10 @@ using namespace std;
 class EBookTracker {
 public:
 	EBookTracker() {
-		user_pages_ = vector<int>(MAX_USERS_COUNT+1);
-		page_readers_ = vector<int>(MAX_PAGES_COUNT+1);
+		user_pages_ = vector<int>(MAX_USERS_COUNT + 1);
+		page_readers_ = vector<int>(MAX_PAGES_COUNT + 1);
 	}
-	double Cheer(int user_id) {
+	double Cheer(int user_id) const {
 		int page_number = user_pages_[user_id];
 		if (page_number == 0) {
 			return 0;
@@ -38,7 +35,7 @@ public:
 	}
 private:
 	static const int MAX_USERS_COUNT = 100'000;
-	static const int MAX_PAGES_COUNT = 100'0;
+	static const int MAX_PAGES_COUNT = 1000;
 	std::vector<int> user_pages_;
 	std::vector<int> page_readers_;
 	int users_counter = 0;
@@ -72,7 +69,7 @@ private:
 	}
 	void ProcessRead() {
 		int user_id = 0;
-		int page_num = 0;;
+		int page_num = 0;
 		input_ >> user_id >> page_num;
 		tracker_.Read(user_id, page_num);
 	}
