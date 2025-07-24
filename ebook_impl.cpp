@@ -29,9 +29,7 @@ public:
 			users_counter++;
 		}
 		user_pages_[user_id] = page_num;
-		for (size_t id = prev_page + 1; id <= page_num; ++id) {
-			page_readers_[id]++;
-		}
+		RecalculateReaders(prev_page + 1, page_num);
 	}
 private:
 	static const int MAX_USERS_COUNT = 100'000;
@@ -39,6 +37,12 @@ private:
 	std::vector<int> user_pages_;
 	std::vector<int> page_readers_;
 	int users_counter = 0;
+
+	void RecalculateReaders(int from_page, int to_page) {
+		for (size_t id = from_page; id <= to_page; ++id) {
+			page_readers_[id]++;
+		}
+	}
 };
 
 
